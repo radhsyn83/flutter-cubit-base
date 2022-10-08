@@ -1,0 +1,30 @@
+name: cubit_core
+description: A new Flutter project.
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.18.2 <3.0.0"
+
+dependencies:
+  dio:
+  dio_smart_retry:
+  get_storage:
+  package_info:
+  flutter_svg:
+  flutter_bloc:
+  flutter_dotenv:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  assets:
+    - .env
+    - .env.development
+  uses-material-design: true
