@@ -7,7 +7,8 @@ class BaseView<T extends StateStreamable<S>, S extends CubitState>
   final Function(BuildContext context, S state)? listener;
   final Function(T cubit) initState;
   final Widget? onLoading;
-  final Widget Function(T cubit, S state) onSuccess;
+  final Widget Function(BuildContext context, S state)? builder;
+  final Widget Function(T cubit, S state)? onSuccess;
   final T? cubit;
   final Function()? onResumed, onInactive, onPaused, onDetached;
 
@@ -17,11 +18,12 @@ class BaseView<T extends StateStreamable<S>, S extends CubitState>
       this.cubit,
       required this.initState,
       this.onLoading,
-      required this.onSuccess,
+      this.onSuccess,
       this.onResumed,
       this.onInactive,
       this.onPaused,
-      this.onDetached})
+      this.onDetached,
+      this.builder})
       : super(key: key);
 
   @override
@@ -35,6 +37,13 @@ class BaseViewState<T extends StateStreamable<S>, S extends CubitState>
   @override
   void initState() {
     super.initState();
+    if (widget.builder == null && widget.onSuccess == null) {
+      assert(false, "builder or (onSuccess || onLoading) is required");
+    }
+    if (widget.builder != null && widget.onSuccess != null) {
+      assert(false,
+          "builder can't combine with onSuccess or onLoading. please choose one.");
+    }
     _useLifecycle = widget.onResumed != null ||
         widget.onInactive != null ||
         widget.onPaused != null ||
@@ -78,13 +87,13 @@ class BaseViewState<T extends StateStreamable<S>, S extends CubitState>
       body: BlocConsumer<T, S>(
         bloc: widget.cubit,
         listener: widget.listener ?? (BuildContext context, S state) {},
-        // builder: widget.builder,
-        builder: (BuildContext context, S state) {
-          if (state.isLoading && widget.onLoading != null) {
-            return widget.onLoading!;
-          }
-          return widget.onSuccess(widget.cubit!, state);
-        },
+        builder: widget.builder ??
+            (BuildContext context, S state) {
+              if (state.isLoading && widget.onLoading != null) {
+                return widget.onLoading!;
+              }
+              return widget.onSuccess!(widget.cubit!, state);
+            },
       ),
     );
   }
