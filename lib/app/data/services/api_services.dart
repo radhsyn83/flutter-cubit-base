@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:cubit_core/app/data/services/base_services.dart';
 import 'package:cubit_core/app/data/services/log_interceptor.dart';
 import 'package:cubit_core/app/utils/error.dart';
-import 'package:cubit_core/constantas.dart';
+import 'package:cubit_core/app/utils/constantas.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_smart_retry/dio_smart_retry.dart';
 import 'package:package_info/package_info.dart';

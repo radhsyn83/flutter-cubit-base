@@ -8,9 +8,9 @@ Future<void> main() async {
   //router
   final router = AppPages();
   //initialize
-  await AppConfig.initialize(isRelease: true);
+  await AppConfig.initialize();
   //Show Main Page
-  runApp(App(router: router, isRelease: true));
+  runApp(App(router: router));
   // Remove the splash screen
   // Future.delayed(
   //     const Duration(seconds: 2), (() => FlutterNativeSplash.remove()));

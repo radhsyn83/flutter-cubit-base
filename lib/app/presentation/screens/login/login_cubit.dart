@@ -5,7 +5,7 @@ import 'package:cubit_core/app/utils/error.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginCubit extends Cubit<DefaultState<LoginModel>> {
-  LoginCubit() : super(DefaultState<LoginModel>(isLoading: true));
+  LoginCubit() : super(const DefaultState<LoginModel>(isLoading: true));
 
   Future<void> loadInitialData() async {
     emit(state.copyWith(isLoading: true));

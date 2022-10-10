@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:cubit_core/app/cubit/main_cubit.dart';
 import 'package:cubit_core/app/cubit/default_state.dart';
 import 'package:cubit_core/app/data/models/login_model.dart';
@@ -50,18 +48,6 @@ class _BodyState extends State<_Body> {
             child: Padding(
               padding: const EdgeInsets.all(8),
               child: Text(widget.state.data?.data?.token ?? "Refresh"),
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                BlocProvider.of<MainCubit>(context).title =
-                    "state.data?.data?.token!";
-              });
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(8),
-              child: Text(BlocProvider.of<MainCubit>(context).title),
             ),
           ),
         ],

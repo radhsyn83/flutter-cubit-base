@@ -1,7 +1,9 @@
+import 'package:equatable/equatable.dart';
+
 class DefaultState<T> extends CubitState {
   final T? data;
 
-  DefaultState({required bool isLoading, String? error, this.data})
+  const DefaultState({required bool isLoading, String? error, this.data})
       : super(isLoading, error);
 
   DefaultState<T> copyWith({bool? isLoading, String? error, T? data}) {
@@ -11,11 +13,14 @@ class DefaultState<T> extends CubitState {
       data: data ?? this.data,
     );
   }
+
+  @override
+  List<Object?> get props => [isLoading, error, data];
 }
 
-abstract class CubitState {
+abstract class CubitState extends Equatable {
   final bool isLoading;
   final String? error;
 
-  CubitState(this.isLoading, this.error);
+  const CubitState(this.isLoading, this.error);
 }
