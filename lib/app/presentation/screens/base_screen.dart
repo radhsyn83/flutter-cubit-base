@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class BaseView<T extends StateStreamable<S>, S extends CubitState>
     extends StatefulWidget {
   final Function(BuildContext context, S state)? listener;
-  final Function(T cubit) initState;
+  final Function(T cubit)? initState, onViewReady;
   final Widget? onLoading;
   final Widget Function(BuildContext context, S state)? builder;
   final Widget Function(T cubit, S state)? onSuccess;
@@ -16,7 +16,8 @@ class BaseView<T extends StateStreamable<S>, S extends CubitState>
       {Key? key,
       this.listener,
       this.cubit,
-      required this.initState,
+      this.initState,
+      this.onViewReady,
       this.onLoading,
       this.onSuccess,
       this.onResumed,
@@ -51,7 +52,10 @@ class BaseViewState<T extends StateStreamable<S>, S extends CubitState>
     if (_useLifecycle) {
       WidgetsBinding.instance.addObserver(this);
     }
-    widget.initState(widget.cubit!);
+
+    if (widget.initState != null) {
+      widget.initState!(widget.cubit!);
+    }
   }
 
   @override
@@ -83,6 +87,9 @@ class BaseViewState<T extends StateStreamable<S>, S extends CubitState>
 
   @override
   Widget build(BuildContext context) {
+    if (widget.onViewReady != null) {
+      widget.onViewReady!(widget.cubit!);
+    }
     return Scaffold(
       body: BlocConsumer<T, S>(
         bloc: widget.cubit,

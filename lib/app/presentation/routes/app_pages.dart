@@ -13,7 +13,7 @@ class AppPages {
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (BuildContext context) => LoginCubit(),
-            child: LoginScreen(),
+            child: const LoginScreen(),
           ),
         );
       default:

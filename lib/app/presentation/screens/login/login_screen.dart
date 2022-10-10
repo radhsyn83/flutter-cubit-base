@@ -1,8 +1,12 @@
+import 'dart:async';
+
+import 'package:cubit_core/app/cubit/main_cubit.dart';
 import 'package:cubit_core/app/cubit/default_state.dart';
 import 'package:cubit_core/app/data/models/login_model.dart';
 import 'package:cubit_core/app/presentation/screens/base_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:cubit_core/app/presentation/screens/login/login_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -11,20 +15,56 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseView<LoginCubit, DefaultState<LoginModel>>(
       cubit: LoginCubit(),
-      initState: (cubit) => cubit.loadInitialData(),
+      onViewReady: (cubit) => cubit.loadInitialData(),
       onLoading: const Center(child: CircularProgressIndicator()),
-      onSuccess: body,
+      onSuccess: (cubit, state) => _Body(
+        cubit: cubit,
+        state: state,
+      ),
     );
   }
+}
 
-  Widget body(LoginCubit cubit, DefaultState<LoginModel> state) {
+class _Body extends StatefulWidget {
+  final LoginCubit cubit;
+  final DefaultState<LoginModel> state;
+  const _Body({
+    Key? key,
+    required this.cubit,
+    required this.state,
+  }) : super(key: key);
+
+  @override
+  State<_Body> createState() => _BodyState();
+}
+
+class _BodyState extends State<_Body> {
+  @override
+  Widget build(BuildContext context) {
     return Center(
-      child: GestureDetector(
-        onTap: () => cubit.loadInitialData(),
-        child: Padding(
-          padding: const EdgeInsets.all(8),
-          child: Text(state.data?.data?.token ?? "Refresh"),
-        ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          GestureDetector(
+            onTap: () => widget.cubit.loadInitialData(),
+            child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: Text(widget.state.data?.data?.token ?? "Refresh"),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                BlocProvider.of<MainCubit>(context).title =
+                    "state.data?.data?.token!";
+              });
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: Text(BlocProvider.of<MainCubit>(context).title),
+            ),
+          ),
+        ],
       ),
     );
   }
