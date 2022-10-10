@@ -1,4 +1,4 @@
-import 'package:cubit_core/app/routes/app_pages.dart';
+import 'package:cubit_core/app/presentation/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 

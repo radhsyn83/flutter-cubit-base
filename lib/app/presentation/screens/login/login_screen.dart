@@ -1,8 +1,8 @@
 import 'package:cubit_core/app/cubit/default_state.dart';
 import 'package:cubit_core/app/data/models/login_model.dart';
-import 'package:cubit_core/app/screens/base_screen.dart';
+import 'package:cubit_core/app/presentation/screens/base_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:cubit_core/app/screens/login/login_cubit.dart';
+import 'package:cubit_core/app/presentation/screens/login/login_cubit.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});

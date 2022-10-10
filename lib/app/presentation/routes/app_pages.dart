@@ -1,6 +1,6 @@
-import 'package:cubit_core/app/routes/app_routes.dart';
-import 'package:cubit_core/app/screens/login/login_cubit.dart';
-import 'package:cubit_core/app/screens/login/login_screen.dart';
+import 'package:cubit_core/app/presentation/routes/app_routes.dart';
+import 'package:cubit_core/app/presentation/screens/login/login_cubit.dart';
+import 'package:cubit_core/app/presentation/screens/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

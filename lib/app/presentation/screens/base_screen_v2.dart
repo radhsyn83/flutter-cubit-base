@@ -1,4 +1,4 @@
-import 'package:cubit_core/app/screens/login/login_state.dart';
+import 'package:cubit_core/app/presentation/screens/login/login_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

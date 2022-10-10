@@ -14,3 +14,8 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+.env
+BASE_URL=https://base_api_url.com/api/v1
+.env.development
+BASE_URL=https://base_api_url.com/api/stg

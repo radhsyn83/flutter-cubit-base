@@ -19,19 +19,3 @@ abstract class CubitState {
 
   CubitState(this.isLoading, this.error);
 }
-
-// class DefaultState<T> {
-//   final bool isLoading;
-//   final String? error;
-//   final T? data;
-
-//   DefaultState({required this.isLoading, this.error, this.data});
-
-//   DefaultState<T> copyWith({bool? isLoading, String? error, T? data}) {
-//     return DefaultState(
-//       isLoading: isLoading ?? this.isLoading,
-//       error: error ?? this.error,
-//       data: data ?? this.data,
-//     );
-//   }
-// }
