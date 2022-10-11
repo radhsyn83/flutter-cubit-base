@@ -1,4 +1,7 @@
 import 'package:cubit_core/app/presentation/routes/app_routes.dart';
+import 'package:cubit_core/app/presentation/screens/example.dart';
+import 'package:cubit_core/app/presentation/screens/home/home_cubit.dart';
+import 'package:cubit_core/app/presentation/screens/home/home_screen.dart';
 import 'package:cubit_core/app/presentation/screens/login/login_cubit.dart';
 import 'package:cubit_core/app/presentation/screens/login/login_screen.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +15,15 @@ class AppPages {
       case Routes.INITIAL:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
+            create: (BuildContext context) => HomeCubit(),
+            child: HomeScreen(),
+          ),
+        );
+      case Routes.EXAMPLE:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
             create: (BuildContext context) => LoginCubit(),
-            child: const LoginScreen(),
+            child: Example(),
           ),
         );
       default:
