@@ -12,7 +12,6 @@ class LoginScreen extends StatelessWidget {
     return BaseView<LoginCubit, DefaultState<LoginModel>>(
       cubit: LoginCubit(),
       onViewReady: (cubit) => cubit.loadInitialData(),
-      onLoading: const Center(child: CircularProgressIndicator()),
       onSuccess: (cubit, state) => _Body(
         cubit: cubit,
         state: state,

@@ -6,26 +6,29 @@ class BaseView<T extends StateStreamable<S>, S extends CubitState>
     extends StatefulWidget {
   final Function(BuildContext context, S state)? listener;
   final Function(T cubit)? initState, onViewReady;
-  final Widget? onLoading;
+  final AppBar? appBar;
+  final Widget? onLoading, bottomNavigationBar;
   final Widget Function(BuildContext context, S state)? builder;
   final Widget Function(T cubit, S state)? onSuccess;
   final T? cubit;
   final Function()? onResumed, onInactive, onPaused, onDetached;
 
-  const BaseView(
-      {Key? key,
-      this.listener,
-      this.cubit,
-      this.initState,
-      this.onViewReady,
-      this.onLoading,
-      this.onSuccess,
-      this.onResumed,
-      this.onInactive,
-      this.onPaused,
-      this.onDetached,
-      this.builder})
-      : super(key: key);
+  const BaseView({
+    Key? key,
+    this.appBar,
+    this.bottomNavigationBar,
+    this.listener,
+    this.cubit,
+    this.initState,
+    this.onViewReady,
+    this.onLoading,
+    this.onSuccess,
+    this.onResumed,
+    this.onInactive,
+    this.onPaused,
+    this.onDetached,
+    this.builder,
+  }) : super(key: key);
 
   @override
   State<BaseView<T, S>> createState() => BaseViewState<T, S>();
@@ -91,17 +94,20 @@ class BaseViewState<T extends StateStreamable<S>, S extends CubitState>
       widget.onViewReady!(widget.cubit!);
     }
     return Scaffold(
+      appBar: widget.appBar,
       body: BlocConsumer<T, S>(
         bloc: widget.cubit,
         listener: widget.listener ?? (BuildContext context, S state) {},
         builder: widget.builder ??
             (BuildContext context, S state) {
-              if (state.isLoading && widget.onLoading != null) {
-                return widget.onLoading!;
+              if (state.isLoading) {
+                return widget.onLoading ??
+                    const Center(child: CircularProgressIndicator.adaptive());
               }
               return widget.onSuccess!(widget.cubit!, state);
             },
       ),
+      bottomNavigationBar: widget.bottomNavigationBar,
     );
   }
 }

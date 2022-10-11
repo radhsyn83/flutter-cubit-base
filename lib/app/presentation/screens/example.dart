@@ -59,15 +59,4 @@ class Example
     super.onInit();
     cubit.loadInitialData();
   }
-
-  // @override
-  // Widget onLoading(BuildContext context, DefaultState<LoginModel> state) {
-  //   return super.onLoading(context, state);
-  // }
-
-  // @override
-  // Widget body(BuildContext context, DefaultState<LoginModel> state) {
-  //   return Container();
-  // }
-
 }
